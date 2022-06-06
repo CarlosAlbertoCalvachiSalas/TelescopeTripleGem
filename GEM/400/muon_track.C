@@ -1,3 +1,5 @@
+// Adapted from Carlos Barreto Bachelor's thesis code
+
 #include <fstream>
 #include <cmath>
 
@@ -34,10 +36,10 @@ int main(int argc, char *argv[]) {
 	// Number of events
 	const int events = 100;
 
-	int voltage = 500;
+	int voltage = 400;
 	// Energy of the incoming particle in eV
 
-	int intEnergy = 9;
+	int intEnergy = 11;
 
 	/*
 
