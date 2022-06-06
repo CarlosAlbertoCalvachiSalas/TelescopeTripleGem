@@ -19,7 +19,7 @@
 // 4. V. Tikhonov and R. Veenhof. Nucl. Instr. Meth. A 478, 452-459 (2002).
 // 5. C. Shalem et al. Nucl. Instr. Meth. A, 558, 475–489 (2006).
 //
-// Cited from Carlos Barreto bachelor's thesis at Uniandes
+// Obtained from Carlos Barreto bachelor's thesis at Uniandes
 // *********************************************************************
 
 // Parameters
