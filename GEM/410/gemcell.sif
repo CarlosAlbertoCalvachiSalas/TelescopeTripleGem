@@ -18,7 +18,7 @@ $ldist = 0.2
 $udist = 0.3
 $Edrift = 1600
 $Etrans = 3500
-$deltaV = 500
+$deltaV = 410
 
 $WTuel = 0
 $WTucp = 0
