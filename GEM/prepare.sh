@@ -1,13 +1,3 @@
-cd 380
-cmake .
-make  
-cd ..
-
-cd 390
-cmake .
-make  
-cd ..
-
 cd 400
 cmake .
 make  
