@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <cmath>
+#include <regex>
 
 #include <TCanvas.h>
 #include <TApplication.h>
@@ -33,39 +34,78 @@ int main(int argc, char *argv[]) {
 	double xi = 0.;
 	double yi = 0.;
 
+	double dxi = 0.0;
+	double dyi = 0.0;
+	double dzi = -1.0;
+
 	// Number of events
-	const int events = 100;
+	int events = 100;
 
 	int voltage = 440;
 	// Energy of the incoming particle in eV
-
 	int intEnergy = 9;
 
-	/*
-
-	int intEnergy;
-
-	cout << "Energy(eV): 1E ";
-	cin >> intEnergy;
-	
-	*/
-
 	double energy = pow(10, intEnergy);
+
+	int argon = 70;
+
+	int co2 = 100 - argon;
+
+	if(argc > 1){
+
+		for (int k = 1; k < argc; ++k)
+		{	
+			regex rgx("(\\D+)=(\\S+)+");
+
+			cmatch partsCommands; 
+
+			if(regex_match(argv[k], partsCommands, rgx)){
+
+				if(partsCommands[1] == "x" || partsCommands[1] == "X"){
+					xi = stod(partsCommands[2]);
+				}else if(partsCommands[1] == "y" || partsCommands[1] == "Y"){
+					yi = stod(partsCommands[2]);
+				}else if(partsCommands[1] == "dx" || partsCommands[1] == "Dx" || partsCommands[1] == "DX" || partsCommands[1] == "dX"){
+					dxi = stod(partsCommands[2]);
+				}else if(partsCommands[1] == "dy" || partsCommands[1] == "Dy" || partsCommands[1] == "DY" || partsCommands[1] == "dY"){
+					dyi = stod(partsCommands[2]);
+				}else if(partsCommands[1] == "N"|| partsCommands[1] == "n"|| partsCommands[1] == "event" || partsCommands[1] == "events"){
+					events = stoi(partsCommands[2]);
+				}else if(partsCommands[1] == "intEnergy") {
+					intEnergy = stoi(partsCommands[2]);
+					energy = pow(10, intEnergy);
+				}else if(partsCommands[1] == "Energy" || partsCommands[1] == "energy" || partsCommands[1] == "e"|| partsCommands[1] == "E"){
+					energy = stod(partsCommands[2]);
+				}else if(partsCommands[1] == "argon" || partsCommands[1] == "ARGON" || partsCommands[1] == "Ar" || partsCommands[1] == "AR"){
+					argon = stod(partsCommands[2]);
+					co2 = 100 - argon;
+				}
+
+			}
+			
+		} 
+
+	} else {
+
+		cout << "Energy(eV): 1E ";
+		cin >> intEnergy;
+
+		// Define gaseous medium
+
+		cout << "Argon: ";
+		cin >> argon;
+
+		// int argon = 70;
+
+		co2 = 100 - argon;
+
+	}
 
 	// Grafical interface for the plots
 	TCanvas *cGeom = new TCanvas("Track", "Avalancha por muon que ingresa al detector");
 	cGeom->SetLeftMargin(0.14);
 
-	// Define gaseous medium
 
-	int argon;
-
-	cout << "Argon: ";
-	cin >> argon;
-
-	// int argon = 70;
-
-	int co2 = 100 - argon;
 
 	// Create files to save simulation results 
 
@@ -124,9 +164,9 @@ int main(int argc, char *argv[]) {
 	double track_z = zi;
     
 	// Componentes de la velocidad inicial de la particula incidente
-	double track_dx = 0.0;
-	double track_dy = 0.0;
-	double track_dz = -1.0;
+	double track_dx = dxi;
+	double track_dy = dyi;
+	double track_dz = dzi;
 
 	// Loop over all incoming particles
 	for(int i = 0; i < events; ++i){
