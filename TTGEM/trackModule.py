@@ -139,8 +139,6 @@ def histogram(series, belowNumDev = None,  **kwargs):
 	std = np.std(series)
 
 	if(belowNumDev):
-		#print(len(series[series < mu + 2*std])/len(series))
-		#print(len(series[series < mu + std])/len(series))
 
 		plt.hist(series[series < mu + 2*std], color = 'blue', bins = 40)
 
@@ -149,8 +147,6 @@ def histogram(series, belowNumDev = None,  **kwargs):
 		plt.hist(series, color = 'blue', bins = 40)
 
 	plt.ylabel('Conteos')
-
-	print(mu, std)
 
 	return mu, std
 
@@ -237,7 +233,7 @@ class TGEM():
 
 		try:
 			self.eventsDataFrame = pd.read_csv(self.eventsDataPath)
-		
+
 		except Exception as e:
 
 			self.electronsDataFrame = pd.read_csv(self.electronsDataPath)
@@ -280,7 +276,6 @@ class TTGEM():
 	def getData(self):
 
 		self.TTGEMdataFrame = pd.read_csv(self.TTGEMDataPath)
-
 
 		self.xMuon = np.array(self.TTGEMdataFrame['x'])
 		self.yMuon = np.array(self.TTGEMdataFrame['y'])
@@ -384,9 +379,6 @@ class TTGEM():
 
 		z1, z2, z3 = 0, -1*INTER_GEM_DISTANCE, -2*INTER_GEM_DISTANCE
 
-		#print(x1)
-		#print(y1)
-
 		fig = plt.figure()
 		ax  = fig.add_subplot(111, projection='3d')
 		ax.scatter(x1, y1, z1, color = 'blue', s = 3)
@@ -470,8 +462,6 @@ class TTGEMGroup():
 		pass
 
 	def histAllGains(self, belowNumDev = None):
-
-		#print('Events', len(np.matrix.flatten(self.getAllGains())))
 
 		histogram(np.matrix.flatten(self.getAllGains()),  belowNumDev = belowNumDev)
 
