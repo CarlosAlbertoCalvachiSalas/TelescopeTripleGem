@@ -89,14 +89,12 @@ int main(int argc, char *argv[]) {
 
 		cout << "Energy(eV): 1E ";
 		cin >> intEnergy;
+		energy = pow(10, intEnergy);
 
 		// Define gaseous medium
 
 		cout << "Argon: ";
 		cin >> argon;
-
-		// int argon = 70;
-
 		co2 = 100 - argon;
 
 	}
