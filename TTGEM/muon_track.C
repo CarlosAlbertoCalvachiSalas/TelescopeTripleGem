@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     	{	
 
     		TTGEM *atmospheric = new TTGEM(true);
-    		atmospheric->initArray(stoi(argv[k]));
+    		atmospheric->initArray(stol(argv[k]));
     		atmospheric->runAll();
 
     	}
